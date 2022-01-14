@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import React,{useContext}from 'react'
+
+import Header from './components/Header'
+import Dropdown from './components/Dropdown'
+import Today from './components/Today'
+import Nextdays from './components/Nextdays'
+import Theme from './components/Theme'
+
 import './App.css';
 
+import {CityProvider} from './context/CityContext'
+import {CurrentWeatherProvider} from './context/CurrentWeatherContext'
+import {TemperatureUnitProvider} from './context/TemperatureUnitContext'
+
+
+import BackgroundContext from "./context/BackgroundContext"
+
 function App() {
+
+  const {theme}= useContext(BackgroundContext)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`App ${theme}`}>
+      <Theme/>
+      <Header/>
+      <CityProvider>
+      <CurrentWeatherProvider>
+      <TemperatureUnitProvider>
+      <div className="context">
+          <div className="top-container">
+            <Dropdown/>
+            <Today/>
+            </div>
+          <div className="bot-container">
+          <Nextdays/>
+          </div>
+      </div>
+      </TemperatureUnitProvider>
+      </CurrentWeatherProvider>
+      </CityProvider>
     </div>
   );
 }

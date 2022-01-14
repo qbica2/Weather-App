@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BackgroundProvider} from './context/BackgroundContext'
 
 ReactDOM.render(
   <React.StrictMode>
+    <BackgroundProvider>
     <App />
+    </BackgroundProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,38 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Ubuntu:wght@300;400;700&display=swap');
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 80%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Ubuntu', sans-serif;
+  justify-content:space-between;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+  0 10px 10px rgba(0,0,0,0.22);
+}
+
+.App.blue{
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+}
+
+.App.light{
+  background: linear-gradient(to right,#ffffff, #ffefba, #ffffff);
+}
+.App.dark{
+  background: linear-gradient(to right, #000000, #434343); 
+  color: #ffffff;
+}
+
+.App.netflix{
+  background: linear-gradient(to right, #8e0e00, #1f1c18);
+}
+.App.live{
+  background: linear-gradient(to right, #c02425, #f0cb35);
+}
+.App.lizard{
+  background: linear-gradient(to right, #304352, #d7d2cc);
+}
+
+
+.header{
+  height: 15%;
+  width: 100%;
+
+  display: flex;
+  justify-content:center;
+}
+.theme{
+    align-self: flex-end;
+}
+.theme-button{
+  border: 2px solid #000;
+  border-radius:5px;
+  background-color:rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+  box-shadow:0 25px 45px rgba(0,0,0,0.1);
+}
+.theme-button:hover{
+  border: 2px solid #189AB4;
+  cursor: pointer;
+}
+
+.context{
+  width: 100%;
+  height:80%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.top-container{
+  width: 90%;
+  height: 50%;
+  
+  display: flex;
+}
+
+.bot-container{
+  width: 90%;
+  height: 40%;
+
+  display: flex;
+}
+.dropdown-container{
+  width: 30%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+}
+.form-container{
+  width: 70%;
+  height: 60%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.dropdown{
+  height:30px;
+  font-size:18px;
+  border: 2px solid #000;
+  border-radius:5px;
+}
+.submit-button{
+  width:80px;
+  height:25px;
+  border: 2px solid #000;
+  border-radius:5px;
+}
+.submit-button:hover {
+  font-weight: bolder;
+  border: 2px solid #189AB4;
+  cursor: pointer;
+  transform: scale(110%);
+}
+.unit-button{
+  width:30px;
+  height:25px;
+  border:none ; 
+  background-color:rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+  box-shadow:0 25px 45px rgba(0,0,0,0.1);
+  font-size:16px;
+}
+.unit-button:hover{
+  font-weight: bolder;
+  cursor: pointer;
+  transform: scale(110%);
+}
+.today-container{
+  width: 70%;
+  height: 100%;
+  background-color:rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+  box-shadow:0 25px 45px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.today-top{
+  width: 80%;
+  height: 50%;
+  display: flex;
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.today-top-left{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.city-name{
+  font-size:32px;
+  font-weight:bold;
+}
+
+.today-top-right{
+  width: 50%;
+  display:flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.right{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: flex-end;
+}
+.temp{
+  letter-spacing: 1px;
+  font-size:22px;
+  
+}
+.description{
+  font-size:16px;
+  letter-spacing: 1px;
+}
+
+.today-bot {
+  letter-spacing: 1px;
+  width: 80%;
+  height: 40%;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.next-days-container{
+  width:100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.cards {
+  background-color:rgba(255,255,255,0.1);
+  backdrop-filter: blur(1px);
+  box-shadow:0 25px 45px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+}
+.cards:hover {
+  border: 2px solid #7C99AC;
+  font-weight: bolder;
+  transform: scaleX(1.20) scaleY(1.10);
+}
+.image{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.min-max{
+  width: 100%;
+  text-align: center;
+}
+
+.weekday{
+  width: 100%;
+  text-align: center;
 }
