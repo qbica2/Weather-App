@@ -42,11 +42,24 @@ function Nextdays() {
                 await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,hourly,minutely&units=${unit}&appid=cb8c05677441bdd9cfb678a863d28e9e`).then(res=>setWeather(res.data.daily.map(item=>{
                     let d  = new Date(item.dt*1000)
                     let day = d.toLocaleString("en-GB",{weekday:"long"})
+
+                    const arr = item.weather[0].description.split(" ")
+
+                    for(let i=0;i<arr.length;i++){
+                        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1)
+                    }
+                
+                        const uppercaseDescription = arr.join(' ')
+
                     return{
                         day : day,
                         icon : item.weather[0].icon,
                         min : Math.round(item.temp.min),
                         max : Math.round(item.temp.max),
+                        description: uppercaseDescription,
+                        humidity:item.humidity,
+                        windspeed:item.wind_speed
+
                     }
                 })))
 
@@ -76,7 +89,8 @@ function Nextdays() {
         <div className="next-days-container">
             {
                 filteredWeather.map((item,i)=>(
-                    <div key={i} className="cards">
+                <div key={i} className="box">
+                    <div  className="cards">
                         <div className="weekday">{item.day}</div>
                             <div className="image"> 
                                 <img src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}/>
@@ -88,6 +102,19 @@ function Nextdays() {
                             <div className="min-max">{item.min}&#8457; / {item.max}&#8457;</div>
                         }
                     </div>
+                    <div className="cards-back">
+                        <div className="weekday">{item.day}</div>
+                        <div>{item.description}</div>
+                        <div>Humidity {item.humidity}%</div>
+                            {
+                         unit==="metric" ? 
+                        <div>WindSpeed  {item.windspeed}m/s</div> 
+                            : 
+                        <div>WindSpeed  {item.windspeed}mph</div>
+                            }
+                    </div>
+                </div>
+                    
                 ))
             }
         </div>
