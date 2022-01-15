@@ -2,10 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios";
 import { useFormik } from 'formik';
 
-
 import CityContext from '../context/CityContext'
-import CurrentWeatherContext from "../context/CurrentWeatherContext"
-import TemperatureUnitContext from "../context/TemperatureUnitContext"
 import BackgroundContext from "../context/BackgroundContext"
 
 function Dropdown() {
@@ -13,12 +10,10 @@ function Dropdown() {
     const [data, setData] = useState([])
     const [allCities, setAllCities] = useState([])
 
-    const { city, setCity } = useContext(CityContext)
-    const {currentWeather,setCurrentWeather}=useContext(CurrentWeatherContext)
-    const {unit,setUnit}= useContext(TemperatureUnitContext)
+    const { setCity } = useContext(CityContext)
     const {theme}= useContext(BackgroundContext)
 
-    const {handleChange,handleSubmit,handleBlur,values,touched}=useFormik({
+    const {handleSubmit}=useFormik({
         initialValues:{
             city:"Adana",
         },
@@ -26,7 +21,7 @@ function Dropdown() {
             setCity(allCities.filter((item)=>{
                 if(item===values.city){
                     return item
-                }
+                }else{return false}
             }))
         }
     })
@@ -35,7 +30,7 @@ function Dropdown() {
         setCity(allCities.filter((item)=>{
             if(item===e.target.value){
                 return item
-            }
+            }else{return false}
         }));
         e.target.size=1;
         e.target.blur();
@@ -64,21 +59,21 @@ function Dropdown() {
     }, [data])
 
     
-    useEffect(() => {
-        const getWeatherInfoCurrent = async () =>{
-            try{
-                await axios(`https://api.openweathermap.org/data/2.5/weather?q=${city[0]}&units=${unit}&appid=0ffc648504aef891431a5d0fb0f6474e`)
-                .then(res=>setCurrentWeather(res.data))
+    // useEffect(() => {
+    //     const getWeatherInfoCurrent = async () =>{
+    //         try{
+    //             await axios(`https://api.openweathermap.org/data/2.5/weather?q=${city[0]}&units=${unit}&appid=0ffc648504aef891431a5d0fb0f6474e`)
+    //             .then(res=>setCurrentWeather(res.data))
                 
-            }catch (err) {
-                if (err.response) {
-                    console.error(err.response.data)
-                }
-            }
-        }
+    //         }catch (err) {
+    //             if (err.response) {
+    //                 console.error(err.response.data)
+    //             }
+    //         }
+    //     }
         
-        getWeatherInfoCurrent();
-    },[city,unit])
+    //     getWeatherInfoCurrent();
+    // },[city,unit])
     
 
     return (

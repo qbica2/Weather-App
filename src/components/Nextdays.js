@@ -2,7 +2,7 @@ import React, {useContext,useEffect,useState} from 'react'
 import axios from "axios"
 
 import CityContext from '../context/CityContext'
-import CurrentWeatherContext from "../context/CurrentWeatherContext"
+
 import TemperatureUnitContext from "../context/TemperatureUnitContext"
 
 function Nextdays() {
@@ -11,9 +11,9 @@ function Nextdays() {
     const [weather, setWeather]=useState([])
     const [filteredWeather,setFilteredWeather]=useState([])
 
-    const { city, setCity } = useContext(CityContext)
-    const {currentWeather,setCurrentWeather}=useContext(CurrentWeatherContext)
-    const {unit,setUnit}= useContext(TemperatureUnitContext)
+    const { city } = useContext(CityContext)
+    
+    const {unit}= useContext(TemperatureUnitContext)
 
     
 
@@ -39,7 +39,7 @@ function Nextdays() {
 
         const getSevenDaysWeatherInfo = async () => {
             try {
-                await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,hourly,minutely&units=${unit}&appid=cb8c05677441bdd9cfb678a863d28e9e`).then(res=>setWeather(res.data.daily.map(item=>{
+                await axios(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,hourly,minutely&units=${unit}&appid=ea4b666eb5b7365093d3d40fbab7ea3b`).then(res=>setWeather(res.data.daily.map(item=>{
                     let d  = new Date(item.dt*1000)
                     let day = d.toLocaleString("en-GB",{weekday:"long"})
 
@@ -81,7 +81,7 @@ function Nextdays() {
         setFilteredWeather(weather.filter((item,i)=>{
             if(i>0){
                 return item
-            }
+            }else{return false}
         }))
     },[weather])
 
@@ -93,7 +93,7 @@ function Nextdays() {
                     <div  className="cards">
                         <div className="weekday">{item.day}</div>
                             <div className="image"> 
-                                <img src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}/>
+                                <img src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`} alt=""/>
                             </div>
                         {
                             unit==="metric" ? 
