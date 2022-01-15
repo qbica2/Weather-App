@@ -98,10 +98,40 @@
   align-items: center;
 }
 .dropdown{
-  height:30px;
+  height:auto;
   font-size:18px;
   border: 2px solid #000;
   border-radius:5px;
+}
+
+.dropdown.blue{
+  background-color:#e0eafc
+}
+.dropdown.light{
+  background-color:#ffefba
+}
+.dropdown.dark{
+  background-color:#434343;
+  color:#fff;
+}
+.dropdown.netflix{
+  background-color: #8e0e00;
+}
+.dropdown.live{
+  background-color:#c02425;
+}
+.dropdown.lizard{
+  background-color: #304352;
+}
+
+
+.dropdown:hover{
+  transform:scale(110%);
+  border: 2px solid #0077FF;
+}
+.dropdown:focus{
+  transform:scale(110%);
+
 }
 .submit-button{
   width:80px;

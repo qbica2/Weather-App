@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios";
 import { useFormik } from 'formik';
 
+
 import CityContext from '../context/CityContext'
 import CurrentWeatherContext from "../context/CurrentWeatherContext"
 import TemperatureUnitContext from "../context/TemperatureUnitContext"
+import BackgroundContext from "../context/BackgroundContext"
 
 function Dropdown() {
 
@@ -14,8 +16,9 @@ function Dropdown() {
     const { city, setCity } = useContext(CityContext)
     const {currentWeather,setCurrentWeather}=useContext(CurrentWeatherContext)
     const {unit,setUnit}= useContext(TemperatureUnitContext)
+    const {theme}= useContext(BackgroundContext)
 
-    const {handleChange,handleSubmit,values}=useFormik({
+    const {handleChange,handleSubmit,handleBlur,values,touched}=useFormik({
         initialValues:{
             city:"Adana",
         },
@@ -27,6 +30,18 @@ function Dropdown() {
             }))
         }
     })
+
+    const handleCity = (e)=>{
+        setCity(allCities.filter((item)=>{
+            if(item===e.target.value){
+                return item
+            }
+        }));
+        e.target.size=1;
+        e.target.blur();
+    }
+
+
 
     useEffect(() => {
         const getCityFromData = () => {
@@ -68,15 +83,22 @@ function Dropdown() {
 
     return (
         <div className="dropdown-container">
-            <form onSubmit={handleSubmit} className="form-container">
-                <select name="city" className="dropdown" onChange={handleChange}>
+            <form  onSubmit={handleSubmit} className="form-container">
+                <select 
+                name="city" 
+                className={`dropdown ${theme}` } 
+                
+                onChange={handleCity}
+                size="1"
+                onFocus={(e)=>e.target.size = 6}
+                onBlur={(e)=>e.target.size=1}
+                >
                     {
-                        allCities.map((data, i) => (
-                            <option key={i} value={data}>{data}</option>
+                        allCities.sort((a,b)=>a.localeCompare(b,"tr")).map((data, i) => (
+                            <option className="dropdown-item" key={i} value={data}>{data}</option>
                         ))
                     }
                 </select>
-                <button className="submit-button" type="submit">Show</button>
             </form>
         </div>
     )

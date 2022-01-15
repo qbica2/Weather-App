@@ -4,7 +4,7 @@ const BackgroundContext = createContext()
 
 export const BackgroundProvider = ({children}) => {
 
-    const [theme,setTheme]= useState("white")
+    const [theme,setTheme]= useState("blue")
 
     const values = {
         theme,

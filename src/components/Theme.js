@@ -7,9 +7,7 @@ function Theme() {
     const {theme, setTheme}=useContext(BackgroundContext);
 
     const changeTheme = () =>{
-        if(theme==="white"){
-            setTheme("blue")
-        }else if(theme==="blue"){
+        if(theme==="blue"){
             setTheme("light")
         }else if(theme==="light"){
             setTheme("dark")
@@ -20,7 +18,7 @@ function Theme() {
         }else if(theme==="live"){
             setTheme("lizard")
         }else if(theme==="lizard"){
-            setTheme("white")
+            setTheme("blue")
         }
     }
 
