@@ -259,12 +259,13 @@
 
 .box{
   width: 100px;
+  height: 100%;
   position: relative;
 }
 .box .cards ,
 .box .cards-back{
-  width: 100px;
-  height: 188px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   backface-visibility: hidden;
   cursor: pointer;
