@@ -2,7 +2,6 @@ import React, {useContext,useEffect,useState} from 'react'
 import axios from "axios"
 
 import CityContext from '../context/CityContext'
-import CurrentWeatherContext from "../context/CurrentWeatherContext"
 import TemperatureUnitContext from "../context/TemperatureUnitContext"
 
 function Today() {
@@ -15,21 +14,37 @@ function Today() {
     const [humidity,setHumidity] = useState("")
     const [windSpeed,setWindSpeed] = useState("")
 
-    const { city, setCity } = useContext(CityContext)
-    const {currentWeather,setCurrentWeather}=useContext(CurrentWeatherContext)
+    const [currentTime,setCurrentTime]=useState("")  // saat
+    const [currentYear,setCurrentYear] = useState("")  // yıl
+    const [currentMonth,setCurrentMonth] = useState("")  // ay
+    const [currentWeekday,setCurrentWeekday] = useState("") // gün
+    const [currentDate,setCurrentDate] = useState("") 
+
+    const { city } = useContext(CityContext)
+    
     const {unit,setUnit}= useContext(TemperatureUnitContext)
 
-    let d = new Date()
-    let date = d.getDate();
-    let year = d.getFullYear();
-    let month = d.toLocaleString("en-GB", {month:"long"})
-    let day = d.toLocaleString("en-GB",{weekday:"long"})
-
-    let time = d.toLocaleString([],{
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    })
+    useEffect(() => {
+        setInterval(() => {
+            setCurrentTime(new Date().toLocaleString(["en-GB"],{
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            }))
+            setCurrentWeekday(new Date().toLocaleString(["en-GB"],{
+                weekday:"long",
+            }))
+            setCurrentMonth(new Date().toLocaleString(["en-GB"],{
+                month:"long"
+            }))
+            setCurrentDate(new Date().toLocaleString(["en-GB"],{
+                day: 'numeric',
+            }))
+            setCurrentYear(new Date().toLocaleString(["en-GB"],{
+                year: 'numeric',
+            }))
+        },[1000])
+    },[])
 
     useEffect(() => {
         const getIconsFromApi = async () =>{
@@ -131,11 +146,14 @@ function Today() {
             <div className="today-top">
                 <div className="today-top-left">
                     <div className="city-name">{city}</div>
-                    <div className="date">{day}, {time} <br />{month} {date}, {year}</div>
+                    {
+                        (currentWeekday||currentTime||currentMonth||currentDate||currentYear)  ? <div className="date">{currentWeekday} {currentTime} <br />{currentMonth} {currentDate}, {currentYear} </div> : <div>Loading...</div>
+                        
+                    }
                 </div>
                 <div className="today-top-right">
                     <div className="left">
-                        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`}  />
+                        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
                     </div>
                     <div className="right">
                         {

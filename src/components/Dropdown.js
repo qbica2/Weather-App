@@ -58,24 +58,6 @@ function Dropdown() {
         })))
     }, [data])
 
-    
-    // useEffect(() => {
-    //     const getWeatherInfoCurrent = async () =>{
-    //         try{
-    //             await axios(`https://api.openweathermap.org/data/2.5/weather?q=${city[0]}&units=${unit}&appid=0ffc648504aef891431a5d0fb0f6474e`)
-    //             .then(res=>setCurrentWeather(res.data))
-                
-    //         }catch (err) {
-    //             if (err.response) {
-    //                 console.error(err.response.data)
-    //             }
-    //         }
-    //     }
-        
-    //     getWeatherInfoCurrent();
-    // },[city,unit])
-    
-
     return (
         <div className="dropdown-container">
             <form  onSubmit={handleSubmit} className="form-container">

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Ubuntu:wght@300;400;700&display=swap');
 
 .App {
-  width: 80%;
-  height: 80%;
+  width: 80vw;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +34,6 @@
   background: linear-gradient(to right, #304352, #d7d2cc);
 }
 
-
 .header{
   height: 15%;
   width: 100%;
@@ -42,6 +41,7 @@
   display: flex;
   justify-content:center;
 }
+
 .theme{
     align-self: flex-end;
 }
@@ -133,18 +133,10 @@
   transform:scale(110%);
 
 }
-.submit-button{
-  width:80px;
-  height:25px;
-  border: 2px solid #000;
-  border-radius:5px;
+.dropdown-item:hover{
+  background: #0077FF;
 }
-.submit-button:hover {
-  font-weight: bolder;
-  border: 2px solid #189AB4;
-  cursor: pointer;
-  transform: scale(110%);
-}
+
 .unit-button{
   width:30px;
   height:25px;
